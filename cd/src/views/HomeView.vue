@@ -1,15 +1,15 @@
 <template>
   <div>
-    <button @click="upgradeClick"> upgrade</button>
-    <h1>{{ clickUpgrade }}</h1>
+  <!--   <button @click="upgradeClick"> upgrade</button>
+    <h1>{{ clickUpgrade }}</h1> -->
     <!-- 
     <button @click="multiClick"> mult</button>
     <h1>{{ clickMulti }}</h1> -->
 
-    <img src="https://th.bing.com/th/id/R.ee9ad5f805f79dd1a32db3221b4ea5ed?rik=DzBLh1BSTRI35Q&pid=ImgRaw&r=0" alt=""
+<!--     <img src="https://th.bing.com/th/id/R.ee9ad5f805f79dd1a32db3221b4ea5ed?rik=DzBLh1BSTRI35Q&pid=ImgRaw&r=0" alt=""
       @click="increment" class="clicker">
-    <h1>{{ 1 /* * clickMulti */ + clickUpgrade }}</h1>
-    <button @click="upgradeClick">upgrade</button>
+    <h1>{{ 1 /* * clickMulti */ + clickUpgrade }}</h1> -->
+  <!--   <button @click="upgradeClick">upgrade</button> -->
     <button @click="tick">speed</button>
     <h1>{{ tickSpeed }}</h1>
     <h1>{{ count }}</h1>
