@@ -31,6 +31,7 @@ h2 {
     margin-bottom: 50px;
     position: relative;
     left: 3vw;
+    color: white;
 }
 
 button {
@@ -53,11 +54,12 @@ button {
 }
 
 button:hover {
-    background-color: black;
-    color: #fff;
+  background-color: lightgray;
+  transform: scale(1.02);
 }
 
 button:active {
-    background-color: rgb(92, 92, 92);
+  transform: scale(.98);
+
 }
 </style>

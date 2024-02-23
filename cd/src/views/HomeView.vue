@@ -123,6 +123,10 @@ let interval3 = setInterval(makeGen, tickSpeed.speed.value, upgrades.upgrade4, u
 
 
 <style lang="scss" scoped>
+
+.body{
+  color:  white;
+}
 .tickDisplay {
   font-size: 35px;
   margin-left: 43vw;
@@ -148,12 +152,12 @@ button {
 }
 
 button:hover {
-  background-color: black;
-  color: #fff;
+  background-color: lightgray;
+  transform: scale(1.02);
 }
 
 button:active {
-  background-color: rgb(92, 92, 92);
+  transform: scale(.98);
 }
 
 .countContainer {
