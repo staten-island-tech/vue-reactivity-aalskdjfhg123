@@ -1,20 +1,14 @@
 <template>
-  <div>
-  <!--   <button @click="upgradeClick"> upgrade</button>
-    <h1>{{ clickUpgrade }}</h1> -->
-    <!-- 
-    <button @click="multiClick"> mult</button>
-    <h1>{{ clickMulti }}</h1> -->
+  <div class="body">
 
-<!--     <img src="https://th.bing.com/th/id/R.ee9ad5f805f79dd1a32db3221b4ea5ed?rik=DzBLh1BSTRI35Q&pid=ImgRaw&r=0" alt=""
-      @click="increment" class="clicker">
-    <h1>{{ 1 /* * clickMulti */ + clickUpgrade }}</h1> -->
-  <!--   <button @click="upgradeClick">upgrade</button> -->
-    <button @click="tick">speed</button>
-    <h1>{{ tickSpeed }}</h1>
-    <h1>{{ count }}</h1>
+    <div class="countContainer"><span class="count">{{ count }} cookie clickers</span></div>
+
+    <div class="button"> <button @click="tick">speed</button>
+    <h1>{{ Math.round(tickSpeed.speed.value)/1000 }}</h1>
+    <h1>{{ tickSpeed.price.value }}</h1></div>
+   
+
     <buildings v-for="things in upgrades" :key="things.name" :-destinations="things" />
-
   </div>
 </template>
 
@@ -23,78 +17,104 @@
 import { ref } from 'vue'
 import buildings from '@/components/buildings.vue';
 
+const count = ref(1000000000000000000)
+
 let upgrades = {
   upgrade1: {
-    price: 100,
-    power: ref(1),
+    name: "cookie clicker clicker",
+    price: ref(10),
+    power: ref(0),
     effect: function () {
-      this.power.value++
-    }
+      if (count.value >= this.price.value) {
+        this.power.value++
+        count.value -= this.price.value
+        this.price.value = Math.round(this.price.value *= 1.15)
+      } else {
+      }
+    },
   },
   upgrade2: {
-    price: 200,
+    name: "cookie clicker clicker clicker",
+    price: ref(100),
     power: ref(0),
     effect: function () {
-      this.power.value++
-    }
+      if (count.value >= this.price.value) {
+        this.power.value++
+        count.value -= this.price.value
+        this.price.value = Math.round(this.price.value *= 1.15)
+      } else {
+        alert("poor")
+      }
+    },
   },
   upgrade3: {
-    price: 300,
+    name: "cookie clicker clicker clicker clicker",
+    price: ref(10000),
     power: ref(0),
     effect: function () {
-      this.power.value++
+      if (count.value >= this.price.value) {
+        this.power.value++
+        count.value -= this.price.value
+        this.price.value = Math.round(this.price.value *= 1.15)
+      } else {
+        alert("poor")
+      }
     }
   },
   upgrade4: {
-    price: 400,
+    name: "cookie clicker clicker clicker clicker clicker",
+    price: ref(1000000),
     power: ref(0),
     effect: function () {
-      this.power.value++
+      if (count.value >= this.price.value) {
+        this.power.value++
+        count.value -= this.price.value
+        this.price.value = Math.round(this.price.value *= 1.15)
+      } else {
+        alert("poor")
+      }
     }
   },
 }
 
 
-const count = ref(0)
-const clickUpgrade = ref(0)
-/* const clickMulti = ref(1)
- */
-const tickSpeed = ref(1000)
+const tickSpeed = {
+  speed: ref(1000),
+  price: ref(1000),
+  effect: function () {
+    this.speed.value *= .875
+    this.price.value = Math.round(this.price.value *= 10)
+  }
+}
+
 
 
 function makeGen(maker, makee) {
   makee.power.value += maker.power.value
 }
 
-function upgradeClick() {
-  clickUpgrade.value++
-}
-
-/* function multiClick() {
-  clickMulti.value *= 2
-}
- */
-
 function autoIncrement() {
   count.value += upgrades.upgrade1.power.value
 }
 function tick() {
-  tickSpeed.value *= .95;
-  clearInterval(interval, interval);//removes old tickspeed so the new and old dont stack
-  interval = setInterval(autoIncrement, tickSpeed.value);//new tickspeed
-  interval1 = setInterval(makeGen, tickSpeed.value, upgrades.upgrade2, upgrades.upgrade1);
-  interval2 = setInterval(makeGen, tickSpeed.value, upgrades.upgrade3, upgrades.upgrade2);
-  interval3 = setInterval(makeGen, tickSpeed.value, upgrades.upgrade4, upgrades.upgrade3);
+  if(count.value >= tickSpeed.price.value){
+    count.value -= tickSpeed.price.value
+  tickSpeed.effect()
+  clearInterval(interval);
+  clearInterval(interval1)
+  clearInterval(interval2)
+  clearInterval(interval3) //removes old tickspeed so the new and old dont stack
+  interval = setInterval(autoIncrement, tickSpeed.speed.value);//new tickspeed
+  interval1 = setInterval(makeGen, tickSpeed.speed.value, upgrades.upgrade2, upgrades.upgrade1);
+  interval2 = setInterval(makeGen, tickSpeed.speed.value, upgrades.upgrade3, upgrades.upgrade2);
+  interval3 = setInterval(makeGen, tickSpeed.speed.value, upgrades.upgrade4, upgrades.upgrade3);
 }
-let interval = setInterval(autoIncrement, tickSpeed.value);
-let interval1 = setInterval(makeGen, tickSpeed.value, upgrades.upgrade2, upgrades.upgrade1);
-let interval2 = setInterval(makeGen, tickSpeed.value, upgrades.upgrade3, upgrades.upgrade2);
-let interval3 = setInterval(makeGen, tickSpeed.value, upgrades.upgrade4, upgrades.upgrade3);
+}
+let interval = setInterval(autoIncrement, tickSpeed.speed.value);
+let interval1 = setInterval(makeGen, tickSpeed.speed.value, upgrades.upgrade2, upgrades.upgrade1);
+let interval2 = setInterval(makeGen, tickSpeed.speed.value, upgrades.upgrade3, upgrades.upgrade2);
+let interval3 = setInterval(makeGen, tickSpeed.speed.value, upgrades.upgrade4, upgrades.upgrade3);
 //there is 1000% a better way to do this, i am just not smart enough to knpw
-
-function increment() {
-  count.value += 1 * clickMulti.value + clickUpgrade.value
-}
 
 </script>
 
@@ -104,16 +124,33 @@ function increment() {
 
 
 <style lang="scss" scoped>
-.clicker {
-  width: 30%;
-  height: 30%;
-}
 
-.clicker:hover {
-  transform: scale(1.02);
-}
 
-.clicker:active {
-  transform: scale(.98);
+button{
+  padding: 1.3em 3em;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 2.5px;
+  color: #000;
+  background-color: #fff;
+  border: solid black;
+  transition: all 0.3s ease 0s;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 900;
+}
+button:hover {
+  background-color:black;
+  color: #fff;
+}
+button:active{
+ background-color: rgb(92, 92, 92);
+}
+.countContainer {
+  display: flex;
+  font-size: 80px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5vh;
 }
 </style>
