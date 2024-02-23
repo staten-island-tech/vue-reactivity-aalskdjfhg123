@@ -1,7 +1,7 @@
 <template>
     <div>
         <h2>{{ Destinations.power.value }} {{ Destinations.name }}s
-            <button @click="Destinations.effect">{{ Destinations.price }} cookie clickers clikers</button>
+            <button @click="Destinations.effect">Cost: {{ Destinations.price }} incrementals</button>
         </h2>
 
     </div>
@@ -41,9 +41,9 @@ button {
     font-size: 12px;
     text-transform: uppercase;
     letter-spacing: 2.5px;
-    color: white;
-    background-color: #84816e;
-    border: solid #5d5c4a;
+    color: black;
+    background-color: white;
+    border: solid black;
     transition: all 0.3s ease 0s;
     border-radius: 10px;
     cursor: pointer;
@@ -53,7 +53,7 @@ button {
 }
 
 button:hover {
-    background-color: #cac5b7;
+    background-color: black;
     color: #fff;
 }
 
